@@ -1,0 +1,25 @@
+<template>
+    <div class="form-container">
+        <form onsubmit={handleSubmit}>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" maxlength="50" onchange={handleInputChange} value={formData.firstName} required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" maxlength="50" onchange={handleInputChange} value={formData.lastName} required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" maxlength="50" onchange={handleInputChange} value={formData.email} required>
+
+            <label for="cellphoneNumber">Contact Number:</label>
+            <input type="tel" id="cellphoneNumber" name="cellphoneNumber" placeholder="Enter your cellphone number" onchange={handleInputChange} value={formData.cellphoneNumber} required>
+
+            <label for="nightclub">Select Nightclub:</label>
+            <lightning-combobox 
+                name="nightclub" value={formData.nightclub} options={nightclubOptions} onchange={handleInputChange}>
+            </lightning-combobox>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</template>
+
