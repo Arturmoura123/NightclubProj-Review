@@ -1,10 +1,11 @@
 import { LightningElement, wire } from 'lwc';
 import createContact from '@salesforce/apex/ContactController.createContact';
 import getNightclubAccounts from '@salesforce/apex/AccountController.getNightclubAccounts';
+import { NavigationMixin } from 'lightning/navigation';
 
 
 
-export default class GuessForm extends LightningElement {
+export default class GuessForm extends NavigationMixin(LightningElement) {
     formData = {
         firstName: '',
         lastName: '',
@@ -56,9 +57,20 @@ export default class GuessForm extends LightningElement {
                 phone: this.formData.cellphoneNumber,
                 nightclub: this.formData.nightclub
             });
-
-            console.log('New Contact Created with Id:', contactId); 
-            alert('Contact created successfully!');
+            console.log('Navigating to successPage');
+            this[NavigationMixin.Navigate]({
+                type: 'standard__component',
+                attributes: {
+                    componentName: 'c__SuccessPageWrapper'
+                },
+                state: {
+                    c__firstName: this.formData.firstName,
+                    c__lastName: this.formData.lastName,
+                    c__email: this.formData.email,
+                    c__phone: this.formData.cellphoneNumber,
+                    c__nightclub: this.formData.nightclub
+                }
+            });
 
         } catch (error) {
             console.error('Error occurred during contact creation:', error); 
