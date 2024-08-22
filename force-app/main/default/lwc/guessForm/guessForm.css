@@ -1,25 +1,78 @@
-.form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: #fff;
-    font-family: sans-serif;
+.pageflex-container {
+    display: flex;
+    justify-content: space-around;  
+    background-color: #f4f4f9; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-h1, h3 {
-    text-align: center;
+.context-box {
+    flex: 2;
+    background-color: #fff; 
+    padding: 20px;
+    margin-right: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.form-container {
+    flex: 1;
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 400px; 
+}
+
+.context-box h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.context-box p {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.context-box ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #444;
+}
+
+.context-box ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.warning-text {
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 165px;
+    font-size: 16px;
 }
 
 label {
     display: block;
     margin-top: 10px;
+    font-weight: bold; 
 }
 
 input, select, textarea, button {
     width: 100%;
     margin-top: 5px;
-    padding: 8px;
+    padding: 10px;
     box-sizing: border-box;
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
 }
 
 button {
@@ -27,17 +80,22 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
+    padding: 10px;
+    border-radius: 4px; 
+    transition: background-color 0.3s ease; 
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-.lightning-combobox {
-    margin-top: -10px; /* Adjust as needed */
-    padding-top: 0; /* Remove any padding that might add space */
+.footer-box {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
-
 

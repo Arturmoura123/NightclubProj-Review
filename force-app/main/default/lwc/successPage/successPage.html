@@ -1,10 +1,15 @@
 <template>
-    <lightning-card title="Success!">
-        <p class="slds-p-around_medium">Your registration was successful.</p>
-        <p class="slds-p-around_medium">First Name: {firstName}</p>
-        <p class="slds-p-around_medium">Last Name: {lastName}</p>
-        <p class="slds-p-around_medium">Email: {email}</p>
-        <p class="slds-p-around_medium">Nightclub: {nightclubName}</p>
-        <!-- Add a QR code or any additional details here -->
-    </lightning-card>
+    <div class="success-container2">
+        <h1>Success!</h1>
+        <p class="success-message">Your registration was successful.</p>
+        <div class="user-details">
+            <p><strong>Name:</strong> {firstName} {lastName}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone Number:</strong> {phone}</p>
+            <p><strong>Nightclub:</strong> {nightclubName}</p>
+        </div>
+        <!-- QR Code will be generated in this div -->
+        <div class="qrcode"></div>
+    </div>
 </template>
+

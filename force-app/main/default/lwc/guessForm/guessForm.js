@@ -2,7 +2,7 @@ import { LightningElement, wire } from 'lwc';
 import createContact from '@salesforce/apex/ContactController.createContact';
 import getNightclubAccounts from '@salesforce/apex/AccountController.getNightclubAccounts';
 import { NavigationMixin } from 'lightning/navigation';
-
+import night from '@salesforce/resourceUrl/night'; 
 
 
 export default class GuessForm extends NavigationMixin(LightningElement) {
@@ -57,7 +57,8 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
                 phone: this.formData.cellphoneNumber,
                 nightclub: this.formData.nightclub
             });
-            console.log('Navigating to successPage');
+            
+            
             this[NavigationMixin.Navigate]({
                 type: 'standard__component',
                 attributes: {

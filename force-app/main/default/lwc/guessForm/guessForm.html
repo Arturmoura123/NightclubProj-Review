@@ -1,25 +1,46 @@
 <template>
-    <div class="form-container">
-        <form onsubmit={handleSubmit}>
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" maxlength="50" onchange={handleInputChange} value={formData.firstName} required>
+    <div class="pageflex-container">
+        <div class="context-box">
+            <h2>Get Ready for an Unforgettable Night!</h2>
+            <p>Join us for an experience like no other. Enjoy the best music, great drinks, and an amazing atmosphere!</p>
+        
+            <!-- <div class="image-container2">
+                <img src={night} alt="Nightclub atmosphere" />
+            </div> -->
+        
+            <ul>
+                <li>🎧 Live DJ sets all night long</li>
+                <li>🍸 Signature cocktails and exclusive drinks</li>
+                <li>🕺 Dance the night away in an electrifying atmosphere</li>
+                <li>🔥 Special guest performances and surprises</li>
+            </ul>
+            <p class="warning-text">⚠️ Prices and conditions may vary depending on the nightclub selected.</p>
+        </div>
+        <div class="form-container">
+            <form onsubmit={handleSubmit}>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" maxlength="50" onchange={handleInputChange} value={formData.firstName} required>
 
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" maxlength="50" onchange={handleInputChange} value={formData.lastName} required>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" maxlength="50" onchange={handleInputChange} value={formData.lastName} required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" maxlength="50" onchange={handleInputChange} value={formData.email} required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" maxlength="50" onchange={handleInputChange} value={formData.email} required>
 
-            <label for="cellphoneNumber">Contact Number:</label>
-            <input type="tel" id="cellphoneNumber" name="cellphoneNumber" placeholder="Enter your cellphone number" onchange={handleInputChange} value={formData.cellphoneNumber} required>
+                <label for="cellphoneNumber">Contact Number:</label>
+                <input type="tel" id="cellphoneNumber" name="cellphoneNumber" placeholder="Enter your cellphone number" onchange={handleInputChange} value={formData.cellphoneNumber} required>
 
-            <label for="nightclub">Select Nightclub:</label>
-            <lightning-combobox 
-                name="nightclub" value={formData.nightclub} options={nightclubOptions} onchange={handleInputChange}>
-            </lightning-combobox>
+                <label for="nightclub">Select Nightclub:</label>
+                <lightning-combobox 
+                    name="nightclub" value={formData.nightclub} options={nightclubOptions} onchange={handleInputChange}>
+                </lightning-combobox>
 
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-box">
+        <p>Central Management registered brand ®</p>
     </div>
 </template>
 

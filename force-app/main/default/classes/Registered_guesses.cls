@@ -1,7 +1,6 @@
 public class Registered_guesses {
 
     public static void updateRegisteredGuesses(List<Contact> contactos, Boolean isDelete) {
-        // Create a map to store the account Id and the number of related contacts
         Map<Id, Integer> accountContactCount = new Map<Id, Integer>();
 
         // Loop through the contacts and update the map
@@ -18,7 +17,7 @@ public class Registered_guesses {
         // Query the accounts that need to be updated
         List<Account> accountsToUpdate = [SELECT Id, Registered_guesses__c FROM Account WHERE Id IN :accountContactCount.keySet()];
 
-        // Update the count on each account
+        
         for (Account acc : accountsToUpdate) {
             Integer existingCount = acc.Registered_guesses__c != null ? Integer.valueOf(acc.Registered_guesses__c) : 0;
             if (isDelete) {
