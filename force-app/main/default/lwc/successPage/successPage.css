@@ -1,35 +1,44 @@
-
-.success-container2 {
-    background-color: #f4f6f9;
-    border-radius: 8px;
+.success-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
     padding: 20px;
     max-width: 600px;
     margin: 40px auto;
-
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 h1 {
-    color: #4caf50;
-    font-size: 2em;
+    color: #28a745;
+    font-size: 2.5rem;
     margin-bottom: 10px;
 }
 
-.success-message {
-    font-size: 1.2em;
+.registration-message {
+    font-size: 1.2rem;
     color: #555;
     margin-bottom: 20px;
 }
 
 .user-details {
     background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
     margin-bottom: 20px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
 }
 
-.qrcode {
-    display: flex;
-    justify-content: center;
+.user-details p {
+    margin: 10px 0;
+}
+
+.email-instruction {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+strong {
+    color: #000;
 }

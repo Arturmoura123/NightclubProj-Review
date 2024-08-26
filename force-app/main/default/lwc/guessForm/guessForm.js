@@ -1,8 +1,9 @@
 import { LightningElement, wire } from 'lwc';
-import createContact from '@salesforce/apex/ContactController.createContact';
+import createContact from '@salesforce/apex/createContactAndEmail.createContactAndSendEmail';
 import getNightclubAccounts from '@salesforce/apex/AccountController.getNightclubAccounts';
 import { NavigationMixin } from 'lightning/navigation';
 import night from '@salesforce/resourceUrl/night'; 
+import checkNightclubCapacity from '@salesforce/apex/Registered_guesses.isFullCapacity';
 
 
 export default class GuessForm extends NavigationMixin(LightningElement) {
@@ -46,6 +47,14 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
         if (phoneDigits.length != 9) {
             alert('Contact creation failed: Contact Number must contain 9 digits.');
             console.warn('Phone number validation failed'); 
+            return;
+        }
+
+        const isFull = await checkNightclubCapacity({
+            nightclubId : this.formData.nightclub
+        });
+        if (isFull) {
+            alert('The selected nightclub is at full capacity. Please choose another.');
             return;
         }
 
