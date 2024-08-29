@@ -1,5 +1,5 @@
-trigger ContactCountTrigger on Contact (after insert, after update, after delete) {
-    if (Trigger.isInsert || Trigger.isUpdate) {
+trigger ContactCountTrigger on Contact (after insert, after delete) {
+    if (Trigger.isInsert) {
         Registered_Guesses.updateRegisteredGuesses(Trigger.new, false);
     }
     if (Trigger.isDelete) {

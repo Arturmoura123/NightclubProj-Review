@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="QR Code">
+        <div if:true={qrCodeUrl}>
+            <img src={qrCodeUrl} alt="QR Code" width="300" height="300"/>
+        </div>
+        <div if:false={qrCodeUrl}>
+            <p>No QR code available.</p>
+        </div>
+    </lightning-card>
+</template>

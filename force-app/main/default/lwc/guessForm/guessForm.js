@@ -2,9 +2,9 @@ import { LightningElement, wire } from 'lwc';
 import createContact from '@salesforce/apex/createContactAndEmail.createContactAndSendEmail';
 import getNightclubAccounts from '@salesforce/apex/AccountController.getNightclubAccounts';
 import { NavigationMixin } from 'lightning/navigation';
-import night from '@salesforce/resourceUrl/night'; 
-import checkNightclubCapacity from '@salesforce/apex/Registered_guesses.isFullCapacity';
-
+import night from '@salesforce/resourceUrl/night';
+import urban_night from '@salesforce/resourceUrl/urban_night';
+import urban_night2 from '@salesforce/resourceUrl/urban_night2';
 
 export default class GuessForm extends NavigationMixin(LightningElement) {
     formData = {
@@ -14,6 +14,10 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
         cellphoneNumber: '',
         nightclub: ''
     };
+    urban1 = night;
+    urban2 = urban_night;
+    urban3 = urban_night2;
+    
 
     nightclubOptions = [];
 
@@ -21,9 +25,9 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
     wiredAccounts({data, error}) {
         if (data) {
             this.nightclubOptions = data.map(account => {
-                return {label: account.label, value: account.value}});
-        }
-        else if (error) {
+                return { label: account.label, value: account.value };
+            });
+        } else if (error) {
             console.error('Error fetching nightclubs:', error);
         }
     }
@@ -32,29 +36,20 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
         const inputName = event.target.name;
         const inputValue = event.target.value;
 
-        console.log(`Input Changed: ${inputName} = ${inputValue}`); 
+        console.log(`Input Changed: ${inputName} = ${inputValue}`);
         this.formData[inputName] = inputValue;
     }
 
-    
     async handleSubmit(event) {
-        event.preventDefault(); 
-        console.log('Form Submitted:', this.formData); 
+        event.preventDefault();
+        console.log('Form Submitted:', this.formData);
 
         // Detection of errors in the Form
         const phone = this.formData.cellphoneNumber;
-        const phoneDigits = phone.replace(/\D/g, ''); 
-        if (phoneDigits.length != 9) {
+        const phoneDigits = phone.replace(/\D/g, '');
+        if (phoneDigits.length !== 9) {
             alert('Contact creation failed: Contact Number must contain 9 digits.');
-            console.warn('Phone number validation failed'); 
-            return;
-        }
-
-        const isFull = await checkNightclubCapacity({
-            nightclubId : this.formData.nightclub
-        });
-        if (isFull) {
-            alert('The selected nightclub is at full capacity. Please choose another.');
+            console.warn('Phone number validation failed');
             return;
         }
 
@@ -66,8 +61,7 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
                 phone: this.formData.cellphoneNumber,
                 nightclub: this.formData.nightclub
             });
-            
-            
+
             this[NavigationMixin.Navigate]({
                 type: 'standard__component',
                 attributes: {
@@ -83,10 +77,12 @@ export default class GuessForm extends NavigationMixin(LightningElement) {
             });
 
         } catch (error) {
-            console.error('Error occurred during contact creation:', error); 
+            console.error('Error occurred during contact creation:', error);
 
             if (error.body && error.body.message.includes('A Contact with this email or phone number already exists.')) {
                 alert('Failed to create contact: A Contact with this email or phone number already exists.');
+            } else if (error.body && error.body.message.includes('full capacity')) {
+                alert('The selected nightclub is at full capacity. Please choose another.');
             } else {
                 alert('Failed to create contact. Please try again.');
             }

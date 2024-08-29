@@ -45,6 +45,7 @@
     font-family: 'Arial', sans-serif;
     font-size: 16px;
     color: #444;
+    margin-top: 15px; /* Adjusted margin */
 }
 
 .context-box ul li {
@@ -56,7 +57,7 @@
 .warning-text {
     color: #ff0000;
     font-weight: bold;
-    margin-top: 165px;
+    margin-top: 20px; /* Adjusted margin */
     font-size: 16px;
 }
 
@@ -98,4 +99,3 @@ button:hover {
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-

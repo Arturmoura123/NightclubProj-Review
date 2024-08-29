@@ -32,11 +32,6 @@ public class Registered_guesses {
         // Perform the DML update
         update accountsToUpdate;
     }
-
-    @AuraEnabled(cacheable=true)
-    public static Boolean isFullCapacity(id nightclubId) {
-        Account getNightclub = [SELECT id, Registered_guesses__c, Max_capacity__c from Account where id = : nightclubId];
-        return getNightclub.Registered_guesses__c >= getNightclub.Max_capacity__c;
-    }
+    
 }
 
