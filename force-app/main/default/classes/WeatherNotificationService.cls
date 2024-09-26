@@ -1,5 +1,5 @@
 // No metodo checkWeatherAndNotify fazemos a call à API 
-// Se estiver a chuver, o metodo boleano isRainy (que está dentro da class WeatherService) será verdadeiro e irá despontar o método sendRainNotification presente nesta class
+// Se estiver a chover, o metodo boleano isRainy (que está dentro da class WeatherService) será verdadeiro e irá despontar o método sendRainNotification presente nesta class
 // O trigger para esta class é um Scheduled Job que criei dentro da Salesforce Org
 
 public with sharing class WeatherNotificationService {

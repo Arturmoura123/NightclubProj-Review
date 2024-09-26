@@ -1,4 +1,4 @@
-// O objetivo desta classe é registrar no Salesforce a data e hora em que o user validou o seu QR Code com sucesso
+// O objetivo desta classe é registar no Salesforce a data e hora em que o user validou o seu QR Code com sucesso
 
 public with sharing class updateContactQRCode {
 

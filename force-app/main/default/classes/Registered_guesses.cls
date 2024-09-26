@@ -21,10 +21,10 @@ public class Registered_guesses {
         for (Account acc : accountsToUpdate) {
             Integer existingCount = acc.Registered_guesses__c != null ? Integer.valueOf(acc.Registered_guesses__c) : 0;
             if (isDelete) {
-                // Decrease count when a contact is deleted
+                // Diminuir o count quando o contacto é deleted
                 acc.Registered_guesses__c = existingCount - accountContactCount.get(acc.Id);
             } else {
-                // Increase count when a contact is inserted or updated
+                // Aumentar o count quando o contacto é inserido
                 acc.Registered_guesses__c = existingCount + accountContactCount.get(acc.Id);
             }
         }
