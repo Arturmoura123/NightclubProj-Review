@@ -1,3 +1,6 @@
+// Esta função vai buscar as contas do tipo Nightclub 
+// Usamos o construtor para que o return options já só tenha o que nós queremos (label e o value) e não o objeto Account
+
 public with sharing class AccountController {
     @AuraEnabled(cacheable=true)
     public static List<AccountOption> getNightclubAccounts() {

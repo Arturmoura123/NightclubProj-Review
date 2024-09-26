@@ -4,6 +4,8 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import updateContactAsScanned from '@salesforce/apex/updateContactQRCode.markContactAsScanned';
 
 export default class BarcodeScannerLwcComp extends LightningElement {
+
+    // O Joao Palma mostrou-me este modolo MobileCapabilities e eu limitei-me a copia-lo, adaptando-o ao meu projeto
     scannedBarcode = '';
     scanButtonDisabled = false;
 
@@ -25,12 +27,10 @@ export default class BarcodeScannerLwcComp extends LightningElement {
             this.myScanner.beginCapture(scanningOptions)
             .then((result) => { 
                 this.scannedBarcode = result.value;  
-                console.log('Scanned QR Code Data:', this.scannedBarcode); // Debug statement
-                this.updateContactAsScanned(this.scannedBarcode);  // Pass the scanned barcode data
+                this.updateContactAsScanned(this.scannedBarcode); 
             })
             .catch((error) => { 
                 this.showError('Error during scanning', error.message);
-                console.error('Error during scanning:', error); // Debug statement
             })
             .finally(() => {
                 this.myScanner.endCapture();
@@ -41,19 +41,17 @@ export default class BarcodeScannerLwcComp extends LightningElement {
     }
 
     updateContactAsScanned(scannedData) {
-        console.log('Sending data to Apex:', scannedData); // Debug statement
-        updateContactAsScanned({ data: scannedData })  // Pass the scanned data to Apex
+        console.log('Sending data to Apex:', scannedData); 
+        updateContactAsScanned({ data: scannedData })  
             .then(() => {
                 this.showSuccess('Contact marked as scanned.');
             })
             .catch((error) => {
                 let errorMessage = 'An error occurred while updating the contact';
-                // Check if the error is coming from AuraHandledException and display the specific message
                 if (error.body && error.body.message) {
                     errorMessage = error.body.message;
                 }
                 this.showError('Error updating contact', errorMessage);
-                console.error('Error updating contact in Apex:', error); // Debug statement
             });
     }
 

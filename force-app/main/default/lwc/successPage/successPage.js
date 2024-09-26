@@ -21,6 +21,8 @@ export default class successPage extends LightningElement {
         }
     }
 
+    // Criei esta função porque quero ter acesso ao nome da discoteca (this.nightclub é apenas o Id)
+    // o getRecord permite acedermos aos fields do objeto desde que tenhamos acesso ao Id do mesmo
     @wire(getRecord, { recordId: '$nightclub', fields: 'Account.Name' })
     loadNightclub({ error, data }) {
         if (data) {

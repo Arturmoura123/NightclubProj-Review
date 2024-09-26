@@ -1,9 +1,10 @@
+// Esta class regista o numero de guests de cada discoteca 
+// É ativada cada vez que um Contacto é criado ou deleted (ver o trigger ContactCountTrigger)
 public class Registered_guesses {
 
     public static void updateRegisteredGuesses(List<Contact> contactos, Boolean isDelete) {
         Map<Id, Integer> accountContactCount = new Map<Id, Integer>();
 
-        // Loop through the contacts and update the map
         for (Contact cont : contactos) {
             if (cont.AccountId != null) {
                 if (!accountContactCount.containsKey(cont.AccountId)) {
@@ -14,7 +15,6 @@ public class Registered_guesses {
             }
         }
 
-        // Query the accounts that need to be updated
         List<Account> accountsToUpdate = [SELECT Id, Registered_guesses__c FROM Account WHERE Id IN :accountContactCount.keySet()];
 
         
@@ -29,7 +29,6 @@ public class Registered_guesses {
             }
         }
 
-        // Perform the DML update
         update accountsToUpdate;
     }
     

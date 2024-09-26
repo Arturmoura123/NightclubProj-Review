@@ -2,8 +2,8 @@ public with sharing class WeatherService {
 
     public static String getWeather(String city) {
         HttpRequest req = new HttpRequest();
-        req.setEndpoint('https://c053f5ef-8d68-4d46-9027-5c422b235dc4.mock.pstmn.io/?q=' + city + '&appid=dummy-key2&units=metric');
-        // req.setEndpoint('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=9bf630740096bd5a3411421fb7a449e8&units=metric');
+        req.setEndpoint('https://c053f5ef-8d68-4d46-9027-5c422b235dc4.mock.pstmn.io/?q=' + city + '&appid=dummy-key2&units=metric'); // Usei o Postman para criar um mock server e testar todas as combinações
+        // req.setEndpoint('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=9bf630740096bd5a3411421fb7a449e8&units=metric'); // Esta é a api verdadeira 
         req.setMethod('GET');
 
         Http http = new Http();
@@ -16,6 +16,7 @@ public with sharing class WeatherService {
         }
     }
 
+    // A api está em JSON, transformamos em Apex e percorremos os nested dictionaries até termos a informação pretendida
     public static Boolean isRainy(String weatherData) {
         Map<String, Object> weatherMap = (Map<String, Object>)JSON.deserializeUntyped(weatherData);
         List<Object> weatherList = (List<Object>) weatherMap.get('weather');

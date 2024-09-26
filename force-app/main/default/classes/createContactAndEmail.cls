@@ -1,13 +1,15 @@
 public with sharing class createContactAndEmail {
 
+    // Com este metodo criamos o contacto sendo que este fica automaticamente associado à discoteca que escolheu pelo AccountID
     @AuraEnabled
     public static Id createContactAndSendEmail(String firstName, String lastName, String email, String phone, String nightclub) {
 
-        // Check if the nightclub is at full capacity
+        // Ver se o nightclub está cheio
         Account getNightclub = [SELECT Id, Registered_guesses__c, Max_capacity__c 
                                 FROM Account 
                                 WHERE Id = :nightclub];
 
+        // A lógica que garante o limitar de convidados está na Apex class Registered_guesses
         if (getNightclub.Registered_guesses__c >= getNightclub.Max_capacity__c) {
             throw new AuraHandledException('The selected nightclub is at full capacity.');
         }
@@ -29,7 +31,7 @@ public with sharing class createContactAndEmail {
         newContact.Email = email;
         newContact.Phone = phone;
         newContact.AccountId = nightclub;
-        newContact.QR_Code_URL__c = qrCodeURL; // Store the QR code URL in the contact
+        newContact.QR_Code_URL__c = qrCodeURL; // Meti o QR code dentro do contact para ter logo acesso e poder fazer debugging sem ter de estar a mandar mail
         insert newContact;
 
         sendEmailWithQRCode(newContact.Id, firstName, lastName, email, nightclub);
@@ -37,6 +39,8 @@ public with sharing class createContactAndEmail {
         return newContact.Id;
     }
 
+    // Este metodo cria e manda um email ao user contendo o respetivo QrCode
+    // Tem uma função privada que converte o QR code para blob de forma a poder ser anexado ao email
     @future(callout=true)
     public static void sendEmailWithQRCode(Id contactId, String firstName, String lastName, String email, String nightclub) {
         String qrData = 'Name: ' + firstName + ' ' + lastName + ', Nightclub: ' + nightclub + ' Email: ' + email;
@@ -55,29 +59,29 @@ public with sharing class createContactAndEmail {
             '</div>' +
         '</div>';
 
-        // Create the email
+        // Criar o email
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         mail.setToAddresses(new String[] { email });
         mail.setSubject('Your Nightclub Entry QR Code');
         mail.setHtmlBody(emailBody);  // Changed to HTML body
 
-        // Attach the QR code image
+        // Dar attached to QR code
         Messaging.EmailFileAttachment qrCodeAttachment = new Messaging.EmailFileAttachment();
         qrCodeAttachment.setFileName('qrcode.png');
         qrCodeAttachment.setBody(qrCodeBlob);
         qrCodeAttachment.setContentType('image/png');
         mail.setFileAttachments(new List<Messaging.EmailFileAttachment>{qrCodeAttachment});
 
-        // Send the email
+        // Mandar o email
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
     }
 
-    // This method generates the QR code URL and returns it as a string
+    
     private static String generateQRCodeURL(String qrData) {
         return 'https://api.qrserver.com/v1/create-qr-code/?data=' + EncodingUtil.urlEncode(qrData, 'UTF-8') + '&size=300x300';
     }
 
-    // This method retrieves the QR code as a Blob (image) for email attachment
+    
     private static Blob generateQRCodeBlob(String qrData) {
         Http http = new Http();
         HttpRequest req = new HttpRequest();
